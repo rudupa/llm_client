@@ -46,6 +46,7 @@ A structured reference for open-source AI model families used in autonomous driv
 | [World Models](world_models.md) | Future state prediction, scene generation, temporal simulation | DriveDreamer, Vista, OccWorld, GenAD, MUVO |
 | [Foundation Models](foundation_models.md) | Large pre-trained base models fine-tuned for AD; end-to-end planners | UniAD, DriveVLM, Dolphins, DriveMLM, DriveCoT |
 | [Edge Deployment](edge_deployment.md) | Teacher–student distillation, quantisation, pruning, hardware targets | TensorRT, AIMET, AutoGPTQ, Jetson Orin, SA8775P |
+| [AD Model Architectures](ad_model_architectures.md) | NVIDIA models, component internals (BEV, DETR heads, VLM connectors), architecture combinations, joint E2E training recipes | Cosmos, Hydra-MDP, BEVFusion, UniAD, BEVFormer, PPO/GRPO |
 
 ---
 
