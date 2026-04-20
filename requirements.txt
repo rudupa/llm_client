@@ -1,0 +1,18 @@
+# LLM Client — Python dependencies
+# Install with:  pip install -r requirements.txt
+#
+# If your pip is configured to use a corporate mirror that is unreachable,
+# override the index:
+#   pip install -r requirements.txt --index-url https://pypi.org/simple/
+
+# Anthropic Claude API
+anthropic>=0.49.0
+
+# Google Gemini API
+google-genai>=1.10.0
+
+# Ollama local model client (Python SDK)
+ollama>=0.4.0
+
+# Environment variable loading from .env
+python-dotenv>=1.0.0
