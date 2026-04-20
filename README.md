@@ -158,6 +158,24 @@ Output is saved as `requirements_ISR.md` in the same directory.
 
 ---
 
+## Autonomous Driving AI Documentation
+
+This repository also contains a comprehensive reference on AI model families used in autonomous driving. Recommended reading order:
+
+| # | Document | What it covers |
+|---|----------|---------------|
+| 1 | [autonomous_driving_AI_models.md](autonomous_driving_AI_models.md) | Overview of the full AD AI stack, model family roles, and index to all sub-documents |
+| 2 | [foundation_models.md](foundation_models.md) | Pre-trained base models (LLMs, ViTs, CLIP) that everything else is built on |
+| 3 | [VLM_models.md](VLM_models.md) | Vision-Language Models for scene understanding (perception layer) |
+| 4 | [world_models.md](world_models.md) | Future state prediction and scenario simulation (prediction layer) |
+| 5 | [VLA_models.md](VLA_models.md) | Vision-Language-Action Models for driving decisions and control (planning layer) |
+| 6 | [ad_model_architectures.md](ad_model_architectures.md) | How all components wire together into full architectures; NVIDIA models; joint E2E training recipes |
+| 7 | [edge_deployment.md](edge_deployment.md) | Teacher–student distillation, quantisation, pruning, and deployment on automotive SoCs |
+
+The order follows the natural stack: base knowledge → perception → prediction → action → full system → deployment.
+
+---
+
 ## Related
 
 See [`DESIGN_DOCUMENT.md`](DESIGN_DOCUMENT.md) for the full architecture design of the React-based Requirements Transformer web application that uses this same multi-provider pattern in TypeScript.
