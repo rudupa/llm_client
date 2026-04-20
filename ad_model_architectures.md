@@ -15,6 +15,8 @@ A deep technical reference covering how AD AI models are built internally, how c
   - [2.5 NVIDIA Cosmos + DriveVLM Integration Pattern](#25-nvidia-cosmos--drivevlm-integration-pattern)
 - [3. Component Internals: How Each Module Is Built](#3-component-internals-how-each-module-is-built)
   - [3.1 Sensor Encoders](#31-sensor-encoders)
+    - [Multi-Modal Sensor Suite](#multi-modal-sensor-suite)
+    - [Camera Encoder](#camera-encoder-vision-transformer-path)
   - [3.2 BEV Temporal Encoder (BEVFormer-style)](#32-bev-temporal-encoder-bevformer-style)
   - [3.3 Perception Heads (DETR-style)](#33-perception-heads-detr-style)
   - [3.4 Motion Prediction Head (MTR-style)](#34-motion-prediction-head-mtr-style)
@@ -296,6 +298,33 @@ Camera Images (6 views)       LiDAR Point Cloud
 ## 3. Component Internals: How Each Module Is Built
 
 ### 3.1 Sensor Encoders
+
+#### Multi-Modal Sensor Suite
+
+An autonomous vehicle carries multiple **types** (modalities) of sensors — each capturing a different physical phenomenon. Together they form the **multi-modal sensor suite**. No single sensor covers all conditions, so the AI must fuse them all.
+
+| Sensor | Modality | What it measures | Strength | Weakness |
+|--------|----------|-----------------|----------|---------|
+| **Camera** | Visible light | Colour, texture, lanes, signs | Rich semantic detail, low cost | Fails in rain / fog / darkness |
+| **LiDAR** | Laser pulses (ToF) | Precise 3D point cloud, distances | Accurate depth, works in dark | Expensive; sparse returns in heavy rain |
+| **Radar** | Radio waves | Velocity + distance of objects | All-weather, measures speed directly | Low resolution, no colour/texture |
+| **GPS / GNSS** | Satellite signals | Global absolute position | Absolute localisation | Fails in tunnels; ~1–3 m accuracy |
+| **IMU** | Accelerometers + gyroscopes | Ego acceleration and rotation rate | High-frequency ego-motion | Drifts over time without correction |
+| **HD Map** | Pre-built prior | Road structure, lane topology | Free geometry and semantic prior | Must be maintained and kept current |
+
+**Why fusion matters:** Cameras can't see in fog; LiDAR struggles in heavy rain; radar can't read road signs. Fusing all modalities gives the AI a complete, redundant picture of the environment. This is why models like BEVFusion explicitly combine camera and LiDAR features into a unified Bird's-Eye View (BEV) before any perception or planning.
+
+```
+Camera (6×) ──→ ViT / ResNet encoder ──→ 2D feature maps ──→ BEV lift (LSS)
+                                                                     │
+LiDAR ────────→ VoxelNet sparse conv ──→ BEV pillar features ────────┤
+                                                                     ▼
+Radar (opt.) ──→ point / grid encoder ──────────────────────→ Fused BEV [H×W×C]
+                                                                     │
+GPS + IMU ─────→ ego pose / velocity ──────────────────────→ positional conditioning
+```
+
+---
 
 #### Camera Encoder (Vision Transformer Path)
 
