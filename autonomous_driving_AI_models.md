@@ -4,6 +4,24 @@ A structured reference for open-source AI model families used in autonomous driv
 
 ---
 
+## Table of Contents
+
+- [Model Family Overview](#model-family-overview)
+- [Document Index](#document-index)
+- [Quick Comparison: Model Family by Role](#quick-comparison-model-family-by-role)
+- [Open-Source Model Quick Reference](#open-source-model-quick-reference)
+  - [Vision-Language Models (VLM)](#vision-language-models-vlm)
+  - [Vision-Language-Action Models (VLA)](#vision-language-action-models-vla)
+  - [World Models](#world-models)
+  - [Foundation Models (AD End-to-End)](#foundation-models-ad-end-to-end)
+  - [Edge Deployment Highlights](#edge-deployment-highlights)
+- [AD Software Stack: Where Each Model Type Fits](#ad-software-stack-where-each-model-type-fits)
+- [Key Datasets for Training & Evaluation](#key-datasets-for-training--evaluation)
+- [Getting Started with This Repository](#getting-started-with-this-repository)
+- [Related Documentation](#related-documentation)
+
+---
+
 ## Model Family Overview
 
 ```

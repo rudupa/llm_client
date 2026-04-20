@@ -4,6 +4,30 @@
 
 ---
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Teacher–Student Architecture](#teacherstudent-architecture)
+  - [Distillation Loss Components](#distillation-loss-components)
+- [Edge Hardware Targets](#edge-hardware-targets)
+  - [Automotive-Grade SoCs](#automotive-grade-socs)
+- [Compression Techniques](#compression-techniques)
+  - [1. Knowledge Distillation](#1-knowledge-distillation)
+  - [2. Quantisation](#2-quantisation)
+  - [3. Pruning](#3-pruning)
+  - [4. Architecture Optimisation](#4-architecture-optimisation)
+- [Teacher–Student Pairs (AD-Specific)](#teacherstudent-pairs-ad-specific)
+- [Deployment Toolchains](#deployment-toolchains)
+  - [NVIDIA Jetson / DRIVE](#nvidia-jetson--drive)
+  - [Qualcomm (SA8775P / Snapdragon Ride)](#qualcomm-sa8775p--snapdragon-ride)
+  - [Generic / Cross-Platform](#generic--cross-platform)
+- [Multi-Tier Deployment Architecture](#multi-tier-deployment-architecture)
+- [Distillation Workflow (Step-by-Step)](#distillation-workflow-step-by-step)
+- [Open-Source Distillation Frameworks](#open-source-distillation-frameworks)
+- [Performance Reference: Jetson AGX Orin 64G](#performance-reference-jetson-agx-orin-64g)
+
+---
+
 ## Overview
 
 Autonomous vehicles require real-time AI inference under strict constraints:

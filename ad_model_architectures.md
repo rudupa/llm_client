@@ -4,6 +4,40 @@ A deep technical reference covering how AD AI models are built internally, how c
 
 ---
 
+## Table of Contents
+
+- [1. The Four Architectural Paradigms](#1-the-four-architectural-paradigms)
+- [2. NVIDIA Autonomous Driving Models](#2-nvidia-autonomous-driving-models)
+  - [2.1 NVIDIA Cosmos (2025) — Physical World Foundation Model](#21-nvidia-cosmos-2025--physical-world-foundation-model)
+  - [2.2 NVIDIA Hydra-MDP (2024) — Multi-task Driving Policy](#22-nvidia-hydra-mdp-2024--multi-task-driving-policy)
+  - [2.3 NVIDIA BEVFusion (Camera-LiDAR Fusion)](#23-nvidia-bevfusion-camera-lidar-fusion)
+  - [2.4 NVIDIA DRIVE Platform Models](#24-nvidia-drive-platform-models)
+  - [2.5 NVIDIA Cosmos + DriveVLM Integration Pattern](#25-nvidia-cosmos--drivevlm-integration-pattern)
+- [3. Component Internals: How Each Module Is Built](#3-component-internals-how-each-module-is-built)
+  - [3.1 Sensor Encoders](#31-sensor-encoders)
+  - [3.2 BEV Temporal Encoder (BEVFormer-style)](#32-bev-temporal-encoder-bevformer-style)
+  - [3.3 Perception Heads (DETR-style)](#33-perception-heads-detr-style)
+  - [3.4 Motion Prediction Head (MTR-style)](#34-motion-prediction-head-mtr-style)
+  - [3.5 Planning Head (Waypoint Generation)](#35-planning-head-waypoint-generation)
+  - [3.6 VLM Integration (Foundation Model Path)](#36-vlm-integration-foundation-model-path)
+- [4. Architecture Combinations: Component Assembly](#4-architecture-combinations-component-assembly)
+  - [Combination A: Camera-Only BEV E2E (BEVFormer + UniAD)](#combination-a-camera-only-bev-e2e-bevformer--uniad)
+  - [Combination B: LiDAR-Camera Fusion (BEVFusion + CenterPoint + MTR)](#combination-b-lidar-camera-fusion-bevfusion--centerpoint--mtr)
+  - [Combination C: VLM-Augmented Dual Pipeline (DriveVLM-style)](#combination-c-vlm-augmented-dual-pipeline-drivevlm-style)
+  - [Combination D: Cosmos World Model + RL Policy (NVIDIA Reference Pipeline)](#combination-d-cosmos-world-model--rl-policy-nvidia-reference-pipeline)
+  - [Combination E: Occupancy + Diffusion Planner (OccWorld + DriveDreamer)](#combination-e-occupancy--diffusion-planner-occworld--drivedreamer)
+- [5. Joint End-to-End Training](#5-joint-end-to-end-training)
+  - [5.1 Multi-Task Loss](#51-multi-task-loss)
+  - [5.2 Imitation Learning (Behavioural Cloning)](#52-imitation-learning-behavioural-cloning)
+  - [5.3 Reinforcement Learning Fine-Tuning](#53-reinforcement-learning-fine-tuning)
+  - [5.4 Query Propagation (UniAD / VAD joint training detail)](#54-query-propagation-uniad--vad-joint-training-detail)
+  - [5.5 VLM Joint Training (Visual Instruction Tuning)](#55-vlm-joint-training-visual-instruction-tuning)
+  - [5.6 World Model Joint Pre-training (Cosmos Recipe)](#56-world-model-joint-pre-training-cosmos-recipe)
+- [6. Other Industry E2E Models](#6-other-industry-e2e-models)
+- [7. Architecture Selection Guide](#7-architecture-selection-guide)
+
+---
+
 ## 1. The Four Architectural Paradigms
 
 ```
