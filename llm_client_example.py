@@ -24,7 +24,7 @@ PROVIDER = "ollama"      # Options: "claude" | "gemini" | "ollama"
 MODELS = {
     "claude": "claude-3-7-sonnet-20250219",
     "gemini": "gemini-2.0-flash",
-    "ollama": "llama3.2",           # any model you have pulled locally
+    "ollama": "qwen2:0.5b",             # any model you have pulled locally
 }
 
 OLLAMA_BASE_URL = "http://localhost:11434"  # default Ollama address
